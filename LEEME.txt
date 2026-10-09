@@ -1,0 +1,57 @@
+CHAT LAN - Mensajería entre computadoras en la misma red
+=======================================================
+
+REQUISITOS
+- Python 3.9 o superior en todas las computadoras.
+- Computadoras en la misma red local (mismo router o switch).
+- TCP puerto 5050 accesible en la computadora servidor.
+- No se necesita internet ni instalar paquetes con pip.
+
+PASO 1: ELIGE UN SERVIDOR
+En una computadora Linux (por ejemplo, Kali):
+    python3 chat_lan.py servidor
+
+En Windows:
+    py chat_lan.py servidor
+
+Mantén abierta esta terminal. Usa Ctrl+C para detenerla.
+
+PASO 2: AVERIGUA LA IP DEL SERVIDOR
+En Linux:
+    hostname -I
+
+En Windows:
+    ipconfig
+
+Busca la IPv4 de la tarjeta conectada a la misma red.
+Ejemplo: 192.168.1.100 (sustituye esta IP por la tuya).
+
+PASO 3: CONECTA LAS COMPUTADORAS
+En otra terminal de Kali/Linux:
+    python3 chat_lan.py cliente 192.168.1.100 --nombre Ana
+
+En otra computadora Windows:
+    py chat_lan.py cliente 192.168.1.100 --nombre Luis
+
+Puedes conectar varios participantes a la vez y ver los mensajes de todos.
+También puedes abrir una segunda terminal en el servidor y conectarte usando:
+    python3 chat_lan.py cliente 127.0.0.1 --nombre Servidor
+
+COMANDOS DEL CHAT
+    /usuarios    Ver quienes están conectados
+    /ayuda       Mostrar ayuda
+    /salir       Desconectarte
+
+SOLUCIONES A PROBLEMAS
+1. Verifica que ambas computadoras estén en la misma LAN y que la IP sea la correcta.
+2. En Linux, verifica el firewall. Si usas UFW y está activo:
+       sudo ufw allow 5050/tcp
+3. En Windows, autoriza Python o crea una regla de entrada TCP para el puerto 5050.
+4. Evita una red Wi-Fi de invitados con aislamiento de dispositivos (AP isolation).
+5. Puedes cambiar el puerto en ambos equipos con --puerto 5051.
+
+AVISO DE SEGURIDAD
+- Programa educativo para una red confiable.
+- Los mensajes se transmiten SIN CIFRADO y no hay contraseña.
+- Cualquiera con acceso a la IP y al puerto del servidor puede unirse.
+- No abras/redirijas el puerto hacia Internet.
